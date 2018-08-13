@@ -1,0 +1,16 @@
+{
+  "name": "tailwindcss-filters",
+  "version": "1.0.0",
+  "description": "Tailwind CSS plugin to generate filter and backdrop filter utilities",
+  "author": "Benoît Rouleau <benoit.rouleau@icloud.com>",
+  "license": "ISC",
+  "repository": "https://github.com/benface/tailwindcss-filters.git",
+  "bugs": "https://github.com/benface/tailwindcss-filters/issues",
+  "homepage": "https://github.com/benface/tailwindcss-filters",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "lodash": "^4.17.10"
+  }
+}
