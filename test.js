@@ -14,9 +14,9 @@ plugin({
   },
 })({
   e: value => value,
-  addUtilities: (utilities, variants) => {
+  addUtilities: (utilities) => {
     generatedUtilities = utilities;
   },
 });
 
-console.log("generatedUtilities", generatedUtilities);
+console.log('generatedUtilities', generatedUtilities);
