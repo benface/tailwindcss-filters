@@ -25,7 +25,7 @@ expect.extend({
   toMatchCss: cssMatcher,
 });
 
-test('options are not required', () => {
+test('there is no output by default', () => {
   return generatePluginCss().then(css => {
     expect(css).toMatchCss(``);
   });
