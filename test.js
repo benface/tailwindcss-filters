@@ -2,21 +2,35 @@ const _ = require('lodash');
 const cssMatcher = require('jest-matcher-css');
 const postcss = require('postcss');
 const tailwindcss = require('tailwindcss');
-const defaultConfig = require('tailwindcss/defaultConfig')();
+const defaultConfig = require('tailwindcss/defaultConfig');
 const filtersPlugin = require('./index.js');
 
-const disabledModules = {};
-Object.keys(defaultConfig.modules).forEach(module => {
-  disabledModules[module] = false;
-});
-
-const generatePluginCss = (options = {}) => {
-  return postcss(tailwindcss({
-    modules: disabledModules,
-    plugins: [filtersPlugin(options)],
-  })).process('@tailwind utilities;', {
+const generatePluginCss = (config) => {
+  return postcss(
+    tailwindcss(
+      _.merge({
+        theme: {
+          screens: {
+            'sm': '640px',
+          },
+        },
+        corePlugins: (function() {
+          let disabledCorePlugins = {};
+          Object.keys(defaultConfig.variants).forEach(corePlugin => {
+            disabledCorePlugins[corePlugin] = false;
+          });
+          return disabledCorePlugins;
+        })(),
+        plugins: [
+          filtersPlugin(),
+        ],
+      }, config)
+    )
+  )
+  .process('@tailwind utilities;', {
     from: undefined,
-  }).then(result => {
+  })
+  .then(result => {
     return result.css;
   });
 };
@@ -31,24 +45,33 @@ test('there is no output by default', () => {
   });
 });
 
-test('all the options are working as they should', () => {
+test('utilities can be customized', () => {
   return generatePluginCss({
-    filters: {
-      'none': 'none',
-      'blur': 'blur(5px)',
-    },
-    backdropFilters: {
-      'none': 'none',
-      'blur': 'blur(20px)',
-      'grayscale': 'grayscale(100%)',
+    theme: {
+      filter: {
+        'none': 'none',
+        'grayscale': 'grayscale(1)',
+        'invert': 'invert(1)',
+        'sepia': 'sepia(1)',
+      },
+      backdropFilter: {
+        'none': 'none',
+        'blur': 'blur(20px)',
+      },
     },
   }).then(css => {
     expect(css).toMatchCss(`
       .filter-none {
         filter: none;
       }
-      .filter-blur {
-        filter: blur(5px);
+      .filter-grayscale {
+        filter: grayscale(1);
+      }
+      .filter-invert {
+        filter: invert(1);
+      }
+      .filter-sepia {
+        filter: sepia(1);
       }
       .backdrop-none {
         backdrop-filter: none;
@@ -56,30 +79,72 @@ test('all the options are working as they should', () => {
       .backdrop-blur {
         backdrop-filter: blur(20px);
       }
-      .backdrop-grayscale {
-        backdrop-filter: grayscale(100%);
+      @media (min-width: 640px) {
+        .sm\\:filter-none {
+          filter: none;
+        }
+        .sm\\:filter-grayscale {
+          filter: grayscale(1);
+        }
+        .sm\\:filter-invert {
+          filter: invert(1);
+        }
+        .sm\\:filter-sepia {
+          filter: sepia(1);
+        }
+        .sm\\:backdrop-none {
+          backdrop-filter: none;
+        }
+        .sm\\:backdrop-blur {
+          backdrop-filter: blur(20px);
+        }
       }
     `);
   });
 });
 
-test('variants are supported', () => {
+test('variants can be customized', () => {
   return generatePluginCss({
-    filters: {
-      'none': 'none',
+    theme: {
+      filter: {
+        'none': 'none',
+        'grayscale': 'grayscale(1)',
+      },
+      backdropFilter: {
+        'none': 'none',
+        'blur': 'blur(20px)',
+      },
     },
-    variants: ['hover', 'active'],
+    variants: {
+      filter: ['hover'],
+      backdropFilter: ['active'],
+    },
   }).then(css => {
     expect(css).toMatchCss(`
       .filter-none {
         filter: none;
       }
+      .filter-grayscale {
+        filter: grayscale(1);
+      }
       .hover\\:filter-none:hover {
         filter: none;
       }
-      .active\\:filter-none:active {
-        filter: none;
-      }  
+      .hover\\:filter-grayscale:hover {
+        filter: grayscale(1);
+      }
+      .backdrop-none {
+        backdrop-filter: none;
+      }
+      .backdrop-blur {
+        backdrop-filter: blur(20px);
+      }
+      .active\\:backdrop-none:active {
+        backdrop-filter: none;
+      }
+      .active\\:backdrop-blur:active {
+        backdrop-filter: blur(20px);
+      }
     `);
   });
 });

@@ -1,4 +1,4 @@
-# Filters Tailwind CSS Plugin
+# Filters Plugin for Tailwind CSS
 
 ## Installation
 
@@ -11,19 +11,24 @@ npm install tailwindcss-filters
 ```js
 // In your Tailwind CSS config
 {
+  theme: {
+    filter: { // defaults to {}
+      'none': 'none',
+      'grayscale': 'grayscale(1)',
+      'invert': 'invert(1)',
+      'sepia': 'sepia(1)',
+    },
+    backdropFilter: { // defaults to {}
+      'none': 'none',
+      'blur': 'blur(20px)',
+    },
+  },
+  variants: {
+    filter: ['responsive'], // defaults to ['responsive']
+    backdropFilter: ['responsive'], // defaults to ['responsive']
+  },
   plugins: [
-    require('tailwindcss-filters')({
-      variants: ['responsive'],
-      filters: {
-        'none': 'none',
-        'blur': 'blur(5px)',
-      },
-      backdropFilters: {
-        'none': 'none',
-        'blur': 'blur(20px)',
-        'grayscale': 'grayscale(100%)',
-      },
-    }),
+    require('tailwindcss-filters')(),
   ],
 }
 ```
@@ -31,13 +36,13 @@ npm install tailwindcss-filters
 This plugin generates the following utilities:
 
 ```css
-/* configurable with the "filters" option */
-.filter-[name] {
+/* configurable with the "filter" theme object */
+.filter-[key] {
   filter: [value];
 }
 
-/* configurable with the "backdropFilters" option */
-.backdrop-[name] {
+/* configurable with the "backdropFilter" theme object */
+.backdrop-[key] {
   backdrop-filter: [value];
 }
 ```
