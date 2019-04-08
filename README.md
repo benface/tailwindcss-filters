@@ -9,7 +9,7 @@ npm install tailwindcss-filters
 ## Usage
 
 ```js
-// In your Tailwind CSS config
+// tailwind.config.js
 {
   theme: {
     filter: { // defaults to {}
