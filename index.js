@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
 module.exports = function() {
-  return ({ config, e, addUtilities }) => {
+  return ({ config, e, addUtilities, variants }) => {
     const defaultFilterTheme = {};
     const defaultFilterVariants = ['responsive'];
     const defaultBackdropFilterTheme = {};
@@ -29,7 +29,7 @@ module.exports = function() {
       })
     );
 
-    addUtilities(filterUtilities, config('variants.filter', defaultFilterVariants));
-    addUtilities(backdropFilterUtilities, config('variants.backdropFilter', defaultBackdropFilterVariants));
+    addUtilities(filterUtilities, variants('filter', defaultFilterVariants));
+    addUtilities(backdropFilterUtilities, variants('backdropFilter', defaultBackdropFilterVariants));
   };
 };
