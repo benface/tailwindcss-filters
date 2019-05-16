@@ -1,14 +1,19 @@
 const _ = require('lodash');
 
 module.exports = function() {
-  return ({ config, e, addUtilities, variants }) => {
+  return ({ theme, variants, e, addUtilities }) => {
     const defaultFilterTheme = {};
     const defaultFilterVariants = ['responsive'];
     const defaultBackdropFilterTheme = {};
     const defaultBackdropFilterVariants = ['responsive'];
 
+    const filterTheme = theme('filter', defaultFilterTheme);
+    const filterVariants = variants('filter', defaultFilterVariants);
+    const backdropFilterTheme = theme('backdropFilter', defaultBackdropFilterTheme);
+    const backdropFilterVariants = variants('backdropFilter', defaultBackdropFilterVariants);
+
     const filterUtilities = _.fromPairs(
-      _.map(config('theme.filter', defaultFilterTheme), (value, modifier) => {
+      _.map(filterTheme, (value, modifier) => {
         return [
           `.${e(`filter-${modifier}`)}`,
           {
@@ -19,7 +24,7 @@ module.exports = function() {
     );
 
     const backdropFilterUtilities = _.fromPairs(
-      _.map(config('theme.backdropFilter', defaultBackdropFilterTheme), (value, modifier) => {
+      _.map(backdropFilterTheme, (value, modifier) => {
         return [
           `.${e(`backdrop-${modifier}`)}`,
           {
@@ -29,7 +34,7 @@ module.exports = function() {
       })
     );
 
-    addUtilities(filterUtilities, variants('filter', defaultFilterVariants));
-    addUtilities(backdropFilterUtilities, variants('backdropFilter', defaultBackdropFilterVariants));
+    addUtilities(filterUtilities, filterVariants);
+    addUtilities(backdropFilterUtilities, backdropFilterVariants);
   };
 };
