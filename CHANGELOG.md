@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project mostly adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - XXXX-XX-XX
+
+### Changed
+- Changed to use Tailwind 1.2’s new plugin definition syntax
+
 ## [2.0.0] - 2019-05-13
 
 ### Changed since 2.0.0-beta.1
@@ -40,7 +45,8 @@ and this project mostly adheres to [Semantic Versioning](https://semver.org/spec
 
 Initial release
 
-[Unreleased]: https://github.com/benface/tailwindcss-filters/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/benface/tailwindcss-filters/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/benface/tailwindcss-filters/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/benface/tailwindcss-filters/compare/v2.0.0-beta.1...v2.0.0
 [2.0.0-beta.1]: https://github.com/benface/tailwindcss-filters/compare/v1.0.2...v2.0.0-beta.1
 [1.0.2]: https://github.com/benface/tailwindcss-filters/compare/v1.0.1...v1.0.2

@@ -10,7 +10,7 @@ npm install tailwindcss-filters
 
 ```js
 // tailwind.config.js
-{
+module.exports = {
   theme: {
     filter: { // defaults to {}
       'none': 'none',
@@ -30,7 +30,7 @@ npm install tailwindcss-filters
   plugins: [
     require('tailwindcss-filters')(),
   ],
-}
+};
 ```
 
 This plugin generates the following utilities:
