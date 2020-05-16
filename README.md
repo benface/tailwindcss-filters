@@ -1,9 +1,5 @@
 # Filters Plugin for Tailwind CSS
 
-## Requirements
-
-This plugin requires Tailwind CSS 1.2 or later. If your project uses an older version of Tailwind, you should install the latest 2.x version of this plugin (`npm install tailwindcss-filters@2.x`).
-
 ## Installation
 
 ```bash
@@ -28,7 +24,7 @@ module.exports = {
     },
   },
   variants: {
-    filter: ['responsive'], // defaults to ['responsive']
+    filter: ['responsive', 'hover'], // defaults to ['responsive', 'hover']
     backdropFilter: ['responsive'], // defaults to ['responsive']
   },
   plugins: [
@@ -49,4 +45,29 @@ This plugin generates the following utilities:
 .backdrop-[key] {
   backdrop-filter: [value];
 }
+```
+
+### Hover
+
+The following example shows how to apply the grayscale filter to a background image and a hover style that will set the filter to 'none' (showing the image in color):
+
+````
+<div class="filter-grayscale hover:filter-none" style="background-image: url(...)">...</div>
+````
+
+#### Transition
+You can specify a CSS transition and set the transition duration like so:
+
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    filter: {
+      'none(400)': 'none', //400ms transition duration
+      'grayscale(600)': 'grayscale(1)' //600ms transition duration
+    },
+    ...
+  },
+  ...
+};
 ```
