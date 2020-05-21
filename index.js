@@ -13,6 +13,17 @@ module.exports = plugin(function({ theme, variants, e, addUtilities }) {
     })
   );
 
+  const filterHoverUtilities = _.fromPairs(
+    _.map(theme('filter'), (value, modifier) => {
+      return [
+        `.${e(`hover\:filter-${modifier}`)}` + ':hover',
+        {
+          filter: value,
+        },
+      ];
+    })
+  );
+
   const backdropFilterUtilities = _.fromPairs(
     _.map(theme('backdropFilter'), (value, modifier) => {
       return [
@@ -25,6 +36,7 @@ module.exports = plugin(function({ theme, variants, e, addUtilities }) {
   );
 
   addUtilities(filterUtilities, variants('filter'));
+  addUtilities(filterHoverUtilities, variants('filter'));
   addUtilities(backdropFilterUtilities, variants('backdropFilter'));
 }, {
   theme: {
