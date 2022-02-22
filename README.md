@@ -1,6 +1,6 @@
 # ⛔️ DEPRECATED
 
-Tailwind CSS 2.1+ have built-in `filter` and `backdrop-filter` utilities such as [`blur`](https://tailwindcss.com/docs/blur), [`grayscale`](https://tailwindcss.com/docs/grayscale), [`sepia`](https://tailwindcss.com/docs/sepia), etc. Please use them instead of this plugin. Thank you!
+Tailwind CSS 2.1+ has built-in `filter` and `backdrop-filter` utilities such as [`blur`](https://tailwindcss.com/docs/blur), [`grayscale`](https://tailwindcss.com/docs/grayscale), [`sepia`](https://tailwindcss.com/docs/sepia), etc. Please use them instead of this plugin. Thank you!
 
 # Filters Plugin for Tailwind CSS
 
