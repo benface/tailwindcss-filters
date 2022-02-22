@@ -1,6 +1,6 @@
-# [BLACK LIVES MATTER](https://blacklivesmatters.carrd.co)
+# ⛔️ DEPRECATED
 
-### Be aware. Be angry. Do better. Demand change. Show your support any way you can. Click on the link above to find protests, petitions, and other ways to help. DO NOT LET IT GO SILENT.
+Tailwind CSS 2.1+ have built-in `filter` and `backdrop-filter` utilities such as [`blur`](https://tailwindcss.com/docs/blur), [`grayscale`](https://tailwindcss.com/docs/grayscale), [`sepia`](https://tailwindcss.com/docs/sepia), etc. Please use them instead of this plugin. Thank you!
 
 # Filters Plugin for Tailwind CSS
 
